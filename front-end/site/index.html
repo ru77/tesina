@@ -2,41 +2,46 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/master.css">
     <title>Simple Home Cloud</title>
   </head>
   <body>
+    <ul>
+     <li><a class="active" href="#home">Home</a></li>
+     <li><a href="login.html">Log in</a></li>
+     <li><a href="signup.html">Sign up</a></li>
+     <li><a href="#about">About</a></li>
+    </ul>
+
     <div class="header">
       <h1 align="center">Simple Home Cloud</h1>
     </div>
+
     <main>
-      <table align="center" cellpadding="50">
+      <table align="center" cellpadding="50" >
         <tr>
           <td>
-            <p style="color:white"> Simple by design  </p>
+            <p > Simple by design  </p>
             <br>
-            <img src="imgs/easy_white.jpg" height="100" width="100">
-            <p  style="color:white">Our software follows the <a href="#">kiss</a> philosophy</p>
+            <p  >Our software follows the <a href="#">kiss</a> philosophy</p>
           </td>
           <td>
-            <p style="color:white"> Cryptography  </p>
+            <p > Cryptography  </p>
             <br>
-            <img src="imgs/crypto.jpg" height="100" width="100">
-            <p style="color:white">Your file are stored safely with xxx encryption</p>
+            <p >Your file are stored safely with xxx encryption</p>
           </td>
           <td>
-            <p style="color:white"> Installation </p>
+            <p > Installation </p>
             <br>
-            <img src="imgs/ins.png" height="100" width="100">
-            <p style="color:white">  Ready to use setup on your <a href="#">personal devices</a> </p>
+            <p >  Ready to use setup on your <a href="#">personal devices</a> </p>
           </td>
         </tr>
         <tr>
           <td> </td>
           <td>
-            <button type="button" name="button" class="btn btn-primary btn-block btn-large">Log in </button>
-            <br> 
-            <button type="button" name="button" class="btn btn-primary btn-block btn-large">Sign up</button>
+            <button type="button" name="button" class="btn btn-primary btn-block btn-large" onclick="window.location.href='login.html'">Log in </button>
+            <br> <br>
+            <button type="button" name="button" class="btn btn-primary btn-block btn-large" onclick="window.location.href='signup.html'">Sign up</button>
            </td>
         </tr>
       </table>
