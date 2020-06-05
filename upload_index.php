@@ -27,7 +27,7 @@ session_start();
     }
   ?>
   <div class="upload">
-    <form method="POST" action="upload.php" enctype="multipart/form-data">
+    <form method="POST" action="back-end/Upload.php" enctype="multipart/form-data">
       <div>
         <span>Upload a File:</span>
         <input type="file" name="uploadedFile" />
@@ -36,6 +36,5 @@ session_start();
       <input type="submit" name="uploadBtn" value="Upload" />
     </form>
   </div>
-
 </body>
 </html>
