@@ -1,5 +1,5 @@
 <?php
-require 'DatabaseManager.php';
+require_once 'DatabaseManager.php';
 class Auth{
   private $_db;
 

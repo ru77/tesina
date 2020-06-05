@@ -1,10 +1,10 @@
 <?php
 require_once 'back-end/Auth.php' ;
-require_once 'back-end/DatabaseManager.php';
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+error_reporting(E_ALL | E_WARNING | E_NOTICE);
+ini_set('display_errors', TRUE);
 
 try
 {
@@ -16,10 +16,14 @@ catch (\PDOException $e)
 }
 if (isset($_POST['submit']))
 {
-  $auth->insert($auth->getForm());
-  header( "Location:login.php" );
+	echo "string";
+	$form = ['email'=>$_POST["email"],'password' => $_POST['password']];
+	echo $form['email'];
+  $auth->insert($form);
+	flush();
+  header("Location:index.php",true,  301 );
+	die('should have redirected by now');
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -39,10 +43,10 @@ if (isset($_POST['submit']))
 
 		<div class="login" align="center">
 			<h1>Register</h1>
-		    <form method="post">
-					<input type="email" placeholder="Email" required="required">
+		    <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
+					<input type="email" name="email" placeholder="Email" required="required">
 					<br> <br>
-		      <input type="password" placeholder="Password" required="required" />
+		      <input type="password" name="password" placeholder="Password" required="required" />
 					<br> <br>
 		      <button type="submit" class="">Sign up</button>
 		    </form>
