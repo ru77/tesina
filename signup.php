@@ -8,8 +8,7 @@ error_reporting(E_ALL);
 
 try
 {
-	$db_manager = new DatabaseManager();
-	$auth = new Auth();
+		$auth = new Auth();
 }
 catch (\PDOException $e)
 {
@@ -18,7 +17,7 @@ catch (\PDOException $e)
 if (isset($_POST['submit']))
 {
   $auth->insert($auth->getForm());
-  header( "Location: login.php" );
+  header( "Location:login.php" );
 }
 
 ?>

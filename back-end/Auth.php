@@ -18,22 +18,14 @@ class Auth{
 
   function getForm()
   {
-    if($_POST['type']=="admin")
-    {
-      $type = 1;
-    }else
-    {
-      $type = 0 ;
-    }
-    return $form = ['email'=>$_POST["email"],'password' => $_POST['password'], 'type' => $type];
+    return $form = ['email'=>$_POST["email"],'password' => $_POST['password']];
   }
 
   public function insert($user){
-    $cmd = 'INSERT INTO Users(email,password,type) VALUES(:email,:password,:type)';
+    $cmd = 'INSERT INTO Users(email,password) VALUES(:email,:password)';
     $stmt = $this->_db->prepare($cmd);
     $stmt->bindValue(':email', $user['email']);
     $stmt->bindValue(':password', $user['password']);
-    $stmt->bindValue(':type', $user['type']);
     $stmt->execute();
   }
 
@@ -42,12 +34,6 @@ class Auth{
     $pdo->exec("USE Credentials");
     $stmt = $pdo->prepare("SELECT * FROM Users WHERE username = :username AND password = :password");
     return $stmt->execute(['username' => $form["username"], 'password' => $form["password"]]);
-  }
-  function checkType($pdo,$form)
-  {
-    $stmt = $pdo->prepare("SELECT type FROM Users WHERE username = :username");
-    $stmt->execute(['username' => $form["username"]]);
-    return $name = $stmt->fetchColumn();
   }
   function usernames($pdo)
   {

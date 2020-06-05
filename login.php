@@ -13,18 +13,9 @@ if (isset($_POST['submit']))
 
 	if ($auth->check($pdo,$form))
 	{
-		if ($auth->checkType($pdo,$form)==0)
-		{
 			session_start();
 			$_SESSION["type"] = "user";
-			header( "Location: /control_panel.php" );
-		}
-		else
-		{
-			session_start();
-			$_SESSION["type"] = "admin";
-			header( "Location: /control_panel.php" );
-	 	}
+			header( "Location:control_panel.php" );
 	}
 }
 ?>
