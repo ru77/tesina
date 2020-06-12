@@ -1,13 +1,12 @@
-.login{
+.center_block{
   border-style: solid;
   padding: 10px;
   text-align: center;
   display: table;
   margin-right: auto;
   margin-left: auto;
-  margin-top: 10%;
+  margin-top: 5%;
 }
-
 ul {
   list-style-type: none;
   margin: 0;
@@ -15,11 +14,9 @@ ul {
   overflow: hidden;
   background-color: #333;
 }
-
 li {
   float: left;
 }
-
 li a {
   display: block;
   color: white;
@@ -27,11 +24,9 @@ li a {
   padding: 14px 16px;
   text-decoration: none;
 }
-
 li a:hover:not(.active) {
   background-color: #111;
 }
-
 .active {
   background-color: #4CAF50;
 }

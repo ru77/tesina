@@ -1,0 +1,5 @@
+Options -MultiViews
+RewriteEngine On
+RewriteRule ^$ dispatcher.php?request=home [PT]
+RewriteRule ^([a-z]+)$  dispatcher.php?request=$1 [PT]
+RewriteRule ^([a-z]+)/([a-z]+)$  dispatcher.php?request=$1&param=$2 [PT]

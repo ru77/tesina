@@ -14,6 +14,7 @@ class DatabaseManager{
       PDO::ATTR_EMULATE_PREPARES   => false,
     ];
     $this->_dbAccess = new PDO("mysql:host=$this->_host;charset=utf8mb4", $this->_user, $this->_passw, $options);
+    $this->_dbAccess->exec("USE Credentials");
   }
 
   public function getInstance(){
@@ -35,11 +36,6 @@ class DatabaseManager{
     $cmd2 = 'USE Credentials;';
     $this->_dbAccess->exec($cmd2);
     $this->_dbAccess->exec($cmd);
-  }
-  public function comoda()
-  {
-      $cmd = 'USE Credentials';
-      $this->_dbAccess->exec($cmd);
   }
 }
 

@@ -1,0 +1,14 @@
+/dashboard  [page]
+/login  [page]
+/signup  [page]
+/request/upload => file-upload-procedure
+/request/auth => auth-procedure
+/request/registration => registration-procedure
+/view/? => preview-file-procedure  [page]
+/search/? => search-file-procedure
+/explore => list-file-procedure
+/download/? => download-file-procedure
+/error/? => error-procedure  [page]
+
+-----
+/admin

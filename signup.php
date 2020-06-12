@@ -1,30 +1,3 @@
-<?php
-require_once 'back-end/Auth.php' ;
-
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL | E_WARNING | E_NOTICE);
-ini_set('display_errors', TRUE);
-
-try
-{
-		$auth = new Auth();
-}
-catch (\PDOException $e)
-{
-  throw new \PDOException($e->getMessage(), (int)$e->getCode());
-}
-if (isset($_POST['submit']))
-{
-	echo "string";
-	$form = ['email'=>$_POST["email"],'password' => $_POST['password']];
-	echo $form['email'];
-  $auth->insert($form);
-	flush();
-  header("Location:index.php",true,  301 );
-	die('should have redirected by now');
-}
-?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 	<head>
@@ -41,15 +14,39 @@ if (isset($_POST['submit']))
 		 <li><a href="#about">About</a></li>
 		</ul>
 
-		<div class="login" align="center">
+		<div class="center_block" align="center">
 			<h1>Register</h1>
-		    <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
-					<input type="email" name="email" placeholder="Email" required="required">
-					<br> <br>
-		      <input type="password" name="password" placeholder="Password" required="required" />
-					<br> <br>
-		      <button type="submit" class="">Sign up</button>
-		    </form>
+	    <form id="user_registration">
+				<input type="email" name="email" placeholder="Email" required="required">
+				<br> <br>
+	      <input type="password" name="password" placeholder="Password" required="required" />
+				<br> <br>
+	      <button>Sign up</button>
+	    </form>
+			<div id="response"></div>
 		</div>
+		<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+		<script>
+			var form = document.getElementById("user_registration");
+			form.onsubmit = function(event){
+				event.preventDefault();
+				var email = form.elements.email.value;
+				var psw = form.elements.password.value;
+				var response = $("#response");
+				jQuery.ajax({
+					type: "POST",
+					url: "back-end/Controller.php",
+					data: { registration: true, email: email, password: psw },
+					success: function(data){
+						response.innerText = data;
+						alert("ti sei registrato");
+						window.location ='login.php';
+					},
+					error: function(error){
+						response.innerText = data;
+					},
+				});
+			}
+		</script>
 	</body>
 </html>

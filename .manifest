@@ -1,0 +1,26 @@
+{
+  "LIBS": {
+    "FilesManager": "app/file.php",
+    "UserManager": "app/user.php",
+    "DatabaseManager": "res/database_manager.php",
+    "Commands": {
+      "INTERFACE": "components/commandinterface.js",
+      "AUTH": "components/auth_cmd.js",
+      "REGISTER": "components/register_cmd.js"
+    },
+    "FrontEndBuilder": {
+      "BUILDER": "builder/builder.php",
+      "PAGES": "builder/pages.php"
+    }
+  },
+  "CONTROLLERS": {
+    "FILE": "app/controller_file.php",
+    "AUTH": "app/auth.php"
+  },
+  "MVC": {
+    "CONTROLLER": "bin/abstract_controller.php",
+    "SERVICE": "bin/abstract_service.php",
+    "MODEL": "bin/abstract_model.php"
+  },
+  "USER_FILE_LOCATION": "_files/"
+}

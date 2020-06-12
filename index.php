@@ -1,18 +1,3 @@
-<?php
-require_once 'back-end/DatabaseManager.php';
-
-try
-{
-  $db_manager = new DatabaseManager();
-  $db_manager->writeDB();
-}
-catch (\PDOException $e)
-{
-  throw new \PDOException($e->getMessage(), (int)$e->getCode());
-}
-
-
- ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
