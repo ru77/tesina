@@ -5,7 +5,7 @@ class DatabaseManager{
   private $_passw = "";
   private $_db = "Credentials";
 
-  private $_dbAccess;
+  private static $_dbAccess;
 
   public function __construct(){
     $options = [
@@ -13,12 +13,20 @@ class DatabaseManager{
       PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
       PDO::ATTR_EMULATE_PREPARES   => false,
     ];
-    $this->_dbAccess = new PDO("mysql:host=$this->_host;charset=utf8mb4", $this->_user, $this->_passw, $options);
-    $this->_dbAccess->exec("USE Credentials");
+    try {
+      self::$_dbAccess = new PDO("mysql:host=$this->_host;dbname=Credentials;charset=utf8mb4", $this->_user, $this->_passw, $options);
+    } catch (PDOException $e) {
+     throw new PDOException($e->getMessage(), (int)$e->getCode());
+    }
   }
 
-  public function getInstance(){
-    return $this->_dbAccess;
+  public static function getInstance(){
+    if (self::$_dbAccess) {
+      return self::$_dbAccess;
+    }else {
+      new DatabaseManager();
+      return self::$_dbAccess;
+    }
   }
 
   public function writeDB(){

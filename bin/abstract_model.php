@@ -1,7 +1,12 @@
 <?php namespace Mvc;
 
-  abstract class AbstractModel{
-    function __construct(){}
+  interface Listable{
+    public function get_color_preview();
+    public function get_icon_preview();
+  }
+
+  interface Printable{
+    public function printPreview();
   }
 
  ?>

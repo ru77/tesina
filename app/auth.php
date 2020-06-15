@@ -1,6 +1,7 @@
 <?php namespace AuthManager;
-
-class Auth extends Mvc\AbstractService{
+use Mvc\AbstractService as MVC_AbstractService;
+use UsersManager\FactoryUser as USER_Factory;
+class Auth extends MVC_AbstractService{
 
   private $_authorized_user;
 
@@ -8,33 +9,49 @@ class Auth extends Mvc\AbstractService{
       parent::__construct();
   }
 
-  public function auth($form){
+  public function auth($form, $http_response_flag = false){
+    if(isset($form['check'])){
+        if($GLOBALS['session_handler']->check_user_session()){
+          http_response_code(200);
+        }else http_response_code(404);
+        return;
+    }
     $stmt = parent::$_db->prepare("SELECT * FROM Users WHERE email = :email AND password = :password");
-    if($stmt->execute(['email' => $form["email"], 'password' => $form["password"]])){
+    if($stmt->execute(['email' => $form["email"], 'password' => $form["psw"]])){
       $row = $stmt->fetch();
-      $this->_authorized_user = UsersManager\FactoryUser::getUser($DB_OBJ);
-      $this->user_session();
-      return $user->get_id();
-    }else return 0;
+      $this->_authorized_user = USER_Factory::getUser($row);
+      $GLOBALS['session_handler']->create_user_session($this->_authorized_user);
+    }else{
+      $this->_authorized_user = null;
+      throw new Error("Auth class enable to establish a database connection");
+    }
+    if($http_response_flag){
+      if($this->_authorized_user){
+        http_response_code(200);
+        echo $this->_authorized_user->get_id();
+      }else http_response_code(404);
+    }else return ($this->_authorized_user->get_id() || 0);
   }
 
-  public function registration($form){
-    $this->_authorized_user = UsersManager\FactoryUser::insertUser($form);
+  public function register($form, $http_response_flag = false){
+    $this->_authorized_user = USER_Factory::insertUser($form);
     if($this->_authorized_user){
-      $this->user_session();
+      $GLOBALS['session_handler']->create_user_session($this->_authorized_user);
+      if($http_response_flag) http_response_code(200);
       return true;
     }else{
+      if($http_response_flag) http_response_code(404);
       return false;
     }
   }
 
-  private function user_session(){
-    session_start();
-    if(isset($_SESSION['user_obj'])) $_SESSION['user_obj'] = null;
-    if(isset($_SESSION['user_id'])) $_SESSION['user_id'] = 0;
-    $_SESSION['user_obj'] = $this->_authorized_user;
-    $_SESSION['user_id'] = $this->_authorized_user->get_id();
+  public function deauth(){
+    $GLOBALS['session_handler']->destroy_user_session();
   }
 
+  function get($ID){}
+  function delete($ID){}
+  function insert($OBJ){}
+  function list($FILTERS){}
 }
  ?>

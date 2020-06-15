@@ -1,6 +1,6 @@
 function CommandInterface(target, prefix = '') {
   this.prefix = prefix;
-  this.url = "request/";
+  this.url = "request";
   this.data;
   this.target = target;
 }
@@ -10,7 +10,6 @@ CommandInterface.prototype.data;
 CommandInterface.prototype.buildRequest = function(){}
 
 CommandInterface.prototype.execute = function(callback_success, callback_error) {
-  console.log("ex");
   jQuery.ajax({
     type: "POST",
     url: this.url,
