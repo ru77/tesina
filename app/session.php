@@ -12,7 +12,7 @@ class SessionManager{
   }
 
   public function get_user_id(){
-    if(isset($_SESSION['user_obj'])) {echo $_SESSION['user_obj']->_id ;return $_SESSION['user_obj']->_id;}
+    if(isset($_SESSION['user_id'])) {return $_SESSION['user_id'];}
     else return false;
   }
 
