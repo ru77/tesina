@@ -13,7 +13,7 @@ abstract class AbstractPage{
     if(!$footer){ ?>
       <nav>
         <div class="nav-wrapper black-text light-blue" >
-          <a href="#" class="brand-logo" style="margin-left:10px;"><i class="large material-icons">cloud</i>&nbsp;Cloud</a>
+          <a href="#" class="brand-logo" style="margin-left:10px;"><i class="large material-icons">cloud</i>&nbsp;SimpleCloud</a>
           <ul id="nav-mobile" class="right hide-on-med-and-down">
     <?php }else{ ?>
           <ul>
@@ -44,7 +44,7 @@ abstract class AbstractPage{
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-      <title><?=$this->_titlePage;?> | Cloud</title>
+      <title><?=$this->_titlePage;?> |Simple Cloud</title>
       <style media="screen">
       <?php $this->style(); ?>
       </style>

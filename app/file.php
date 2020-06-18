@@ -2,14 +2,13 @@
 
 final class FactoryFile{
   public static final function uploadFile($file, $user_id){
-    echo "Hello";
     $file = new UploadedFile($file);
     return $file->write($user_id);
   }
 
   public static final function explorer($concreteFiles){
     ?><div class="row"><?php
-    foreach($concreteFiles as $file){
+      foreach($concreteFiles as $file){
       ?>
       <div class="col s6 m4 l3">
         <div class="card" style="min-height: 250px;max-height: 250px;">
@@ -92,6 +91,7 @@ final class UploadedFile extends AbstractFile{
   public function write($user_id){
     // directory in which the uploaded file will be moved
     $user_dir = parent::get_user_dir_path($user_id);
+    echo $user_dir;
     $dest_path = $user_dir ."/". $this->_name;
     if (!file_exists($user_dir)) {
       mkdir($user_dir, 0777, true);

@@ -19,11 +19,14 @@ class Auth extends MVC_AbstractService{
     $stmt = parent::$_db->prepare("SELECT * FROM Users WHERE email = :email AND password = :password");
     if($stmt->execute(['email' => $form["email"], 'password' => $form["psw"]])){
       $row = $stmt->fetch();
-      $this->_authorized_user = USER_Factory::getUser($row);
-      $GLOBALS['session_handler']->create_user_session($this->_authorized_user);
+      if ($row==null){http_response_code(404);}
+      else {
+        $this->_authorized_user = USER_Factory::getUser($row);
+        $GLOBALS['session_handler']->create_user_session($this->_authorized_user);
+      }
     }else{
       $this->_authorized_user = null;
-      throw new Error("Auth class enable to establish a database connection");
+      throw new Error("Auth class unable to establish a database connection");
     }
     if($http_response_flag){
       if($this->_authorized_user){
